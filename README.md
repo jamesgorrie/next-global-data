@@ -18,7 +18,7 @@ Some answers:
 - env vars? Can’t find a way
 - memory vars? Can’t find a shared memory scope
 - publicRuntimeConfig in next.config? not async, can set the promises at a server level, but we still then set the overhead on the client
-- setConfig publicRuntimeConfig? This works and makes the data available on the server, but not the client
+- setConfig publicRuntimeConfig? This works and makes the data available on the server, but not the client. [But, 🤷](https://github.com/vercel/next.js/issues/17354#issuecomment-699695343)
 - files? available via server.fs.write and client.module.import)
 
 Winners?
