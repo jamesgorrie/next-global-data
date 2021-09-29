@@ -3,6 +3,11 @@ const fileSet = require('./store/file-set')
 const envStore = require('./store/env')
 const toggles = require('./toggles')
 
+// @ts-check
+
+/**
+ * @type {import('next').NextConfig}
+ **/
 const nextConfig = {
   redirects: async () => {
     const data = await toggles()
@@ -12,6 +17,9 @@ const nextConfig = {
     envStore.set('nextConfigToggles', data)
 
     return []
+  },
+  publicRuntimeConfig: {
+    toggles
   }
 }
 

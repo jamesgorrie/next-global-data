@@ -1,6 +1,9 @@
 import memoryStore from '../store/memory'
 import fileGet from '../store/file-get'
 import envStore from '../store/env'
+import getConfig from 'next/config'
+const { publicRuntimeConfig } = getConfig()
+console.info(typeof publicRuntimeConfig.toggles)
 
 const IndexPage = () => (
   <>
