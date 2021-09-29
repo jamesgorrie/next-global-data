@@ -4,9 +4,6 @@ import envStore from '../store/env'
 import getConfig from 'next/config'
 const { publicRuntimeConfig } = getConfig()
 
-// This is a function on the server, but undefined on the client
-console.info(typeof publicRuntimeConfig.toggles)
-
 const IndexPage = () => (
   <>
     <h1>Stores</h1>
@@ -25,6 +22,12 @@ const IndexPage = () => (
     <h2>Env</h2>
     <pre>{JSON.stringify(envStore.get("serverToggles"))}</pre>
     <pre>{JSON.stringify(envStore.get("nextConfigToggles"))}</pre>
+
+    <h2>publicRuntimeConfig</h2>
+    {/* This is available on the server, bbut not the client */}
+    {console.info(publicRuntimeConfig.serverToggles)}
+    <pre>{JSON.stringify(publicRuntimeConfig.serverToggles)}</pre>
+    <pre>{JSON.stringify(publicRuntimeConfig.nextConfigToggles)}</pre>
   </>
 )
 
