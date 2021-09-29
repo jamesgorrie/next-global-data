@@ -1,5 +1,6 @@
 import memoryStore from '../store/memory'
 import fileGet from '../store/file-get'
+import envStore from '../store/env'
 
 const IndexPage = () => (
   <>
@@ -15,6 +16,10 @@ const IndexPage = () => (
     <pre>{JSON.stringify(fileGet("serverToggles"))}</pre>
     <pre>{JSON.stringify(fileGet("nextConfigToggles"))}</pre>
     <p><b>Note:</b> both serverToggles and nextConfigToggles are available as they are written to disk at startup, and then available as JSON imports in the next app</p>
+
+    <h2>Env</h2>
+    <pre>{JSON.stringify(envStore.get("serverToggles"))}</pre>
+    <pre>{JSON.stringify(envStore.get("nextConfigToggles"))}</pre>
   </>
 )
 

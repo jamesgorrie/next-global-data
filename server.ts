@@ -4,6 +4,7 @@ import next from 'next'
 import toggles from './toggles'
 import memoryStore from './store/memory'
 import fileSet from './store/file-set'
+import envStore from './store/env'
 
 const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev })
@@ -14,6 +15,7 @@ app.prepare().then(async () => {
 
   memoryStore.set('serverToggles', data)
   fileSet('serverToggles', data)
+  envStore.set('serverToggles', data)
 
   createServer((req, res) => {
     // Be sure to pass `true` as the second argument to `url.parse`.
