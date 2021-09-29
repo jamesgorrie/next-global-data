@@ -3,6 +3,8 @@ import fileGet from '../store/file-get'
 import envStore from '../store/env'
 import getConfig from 'next/config'
 const { publicRuntimeConfig } = getConfig()
+
+// This is a function on the server, but undefined on the client
 console.info(typeof publicRuntimeConfig.toggles)
 
 const IndexPage = () => (
