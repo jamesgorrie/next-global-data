@@ -1,6 +1,8 @@
 {
   "scripts": {
-    "start": "ts-node --project tsconfig.server.json server"
+    "start": "ts-node --project tsconfig.server.json server",
+    "build": "next build",
+    "startProd": "yarn build && NODE_ENV=production ts-node --project tsconfig.server.json server"
   },
   "dependencies": {
     "isomorphic-unfetch": "^3.1.0",

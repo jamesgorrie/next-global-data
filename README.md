@@ -11,16 +11,22 @@ An answer - **let the server fetch the data, and share it with the client.**
 
 If we agree with that, next question!
 
-**Where can this data be accessible to both the server and the client?**
+**Things to test**
 
-Some answers:
+- [ ] the server can set the value
+- [ ] the server can update the value on an interval
+- [ ] the client can read the initial value
+- [ ] the client can read updated values transparently
+- [ ] it works both in `dev` and `prod` mode
 
-- env vars? Can’t find a way
-- memory vars? Can’t find a shared memory scope
-- publicRuntimeConfig in next.config? not async, can set the promises at a server level, but we still then set the overhead on the client
-- setConfig publicRuntimeConfig? This works and makes the data available on the server, but not the client. [But, 🤷](https://github.com/vercel/next.js/issues/17354#issuecomment-699695343)
-- files? available via server.fs.write and client.module.import)
+**places a value can be read**
+- [ ] in [data fetching methods](https://nextjs.org/docs/basic-features/data-fetching)
+- [ ] in components via `import`
+- [ ] the value is available via client e.g. `useEffect`
 
-Winners?
+**Different stores**
 
-- files
+- memory
+- env variables
+- next config
+- file system

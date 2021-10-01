@@ -3,9 +3,9 @@ import { parse } from 'url'
 import next from 'next'
 import toggles from './toggles'
 import memoryStore from './store/memory'
-import fileSet from './store/file-set'
+import fileStore from './store/file'
 import envStore from './store/env'
-import { setConfig } from 'next/config'
+import configStore from './store/config'
 
 const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev })
@@ -16,17 +16,11 @@ app.prepare().then(async () => {
 
 
   memoryStore.set('toggles', data)
-  fileSet('toggles', data)
-  envStore.set('toggles', data)
+  envStore.set('toggles', data.toString())
+  configStore.set('toggles', data)
 
-  setConfig({
-    serverRuntimeConfig: {
-      toggles: JSON.stringify(data)
-    },
-    publicRuntimeConfig: {
-      toggles: JSON.stringify(data)
-    },
-  })
+  fileStore.set('toggles', data)
+  setInterval(() => fileStore.update('toggles', toggles), 1000)
 
   createServer((req, res) => {
     // Be sure to pass `true` as the second argument to `url.parse`.
