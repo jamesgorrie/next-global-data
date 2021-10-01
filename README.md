@@ -13,20 +13,23 @@ If we agree with that, next question!
 
 **Things to test**
 
-- [ ] the server can set the value
-- [ ] the server can update the value on an interval
-- [ ] the client can read the initial value
-- [ ] the client can read updated values transparently
-- [ ] it works both in `dev` and `prod` mode
+- [x] the server can set the value
+- [x] the server can update the value on an interval
+- [x] the client can read the initial value
+- [x] the client can read updated values transparently
+- [x] it works both in `dev` and `prod` mode
 
 **places a value can be read**
-- [ ] in [data fetching methods](https://nextjs.org/docs/basic-features/data-fetching)
+- [x] in [data fetching methods](https://nextjs.org/docs/basic-features/data-fetching)
 - [ ] in components via `import`
 - [ ] the value is available via client e.g. `useEffect`
 
-**Different stores**
+## Different approaches
 
+### working
+- file system
+
+### not working
 - memory
 - env variables
 - next config
-- file system
