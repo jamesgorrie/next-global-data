@@ -22,7 +22,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-, "server.ts", "store/nextConfig.js", "store/file-set.js"  , "store/fil-get.js", "store/memory.js"],
+, "server.ts", "store/nextConfig.js", "store/file-set.ts"  , "store/fil-get.js", "store/memory.ts"],
   "exclude": [
     "node_modules"
   ]

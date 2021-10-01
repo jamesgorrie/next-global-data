@@ -2,7 +2,9 @@ const toggles = require('../toggles');
 const fs = require('fs')
 const path = require('path')
 
-module.exports = async function set(key, value) {
+async function set(key: string, value: unknown) {
   const fileName = path.resolve(__dirname, '.file-cache', `${key}.json`);
   fs.writeFileSync(fileName, JSON.stringify(value))
 }
+
+export default set

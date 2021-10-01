@@ -13,17 +13,18 @@ const handle = app.getRequestHandler()
 
 app.prepare().then(async () => {
   const data = await toggles()
+  process.env.NEXT_PUBLIC_ANALYTICS_ID = "abcdefghijk"
 
-  memoryStore.set('serverToggles', data)
-  fileSet('serverToggles', data)
-  envStore.set('serverToggles', data)
+  memoryStore.set('toggles', data)
+  fileSet('toggles', data)
+  envStore.set('toggles', data)
 
   setConfig({
     serverRuntimeConfig: {
-      serverToggles: JSON.stringify(data)
+      toggles: JSON.stringify(data)
     },
     publicRuntimeConfig: {
-      serverToggles: JSON.stringify(data)
+      toggles: JSON.stringify(data)
     },
   })
 

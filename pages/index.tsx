@@ -2,33 +2,74 @@ import memoryStore from '../store/memory'
 import fileGet from '../store/file-get'
 import envStore from '../store/env'
 import getConfig from 'next/config'
+import { useEffect, useState } from 'react'
+import { GetServerSideProps } from 'next'
 const { publicRuntimeConfig } = getConfig()
 
-const IndexPage = () => (
-  <>
-    <h1>Stores</h1>
 
-    <h2>Memory</h2>
-    <pre>{JSON.stringify(Array.from(memoryStore.entries()))}</pre>
-    <pre>{JSON.stringify(memoryStore.get('serverToggles'))}</pre>
-    <pre>{JSON.stringify(memoryStore.get('nextConfigToggles'))}</pre>
-    <p><b>Note:</b> nextConfigtoggles or serverToggles isn't set on the memoryStore here as it was set in the node context, not the next app</p>
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const memoryToggles = memoryStore.get('toggles')
+  const fileToggles = fileGet('toggles')
+  const envToggles = envStore.get("toggles")
+  const configToggles = publicRuntimeConfig
+  return {
+    props: JSON.parse(JSON.stringify({
+      memoryToggles,
+      fileToggles,
+      envToggles,
+      configToggles,
+    }))
+  }
+}
 
-    <h2>File</h2>
-    <pre>{JSON.stringify(fileGet("serverToggles"))}</pre>
-    <pre>{JSON.stringify(fileGet("nextConfigToggles"))}</pre>
-    <p><b>Note:</b> both serverToggles and nextConfigToggles are available as they are written to disk at startup, and then available as JSON imports in the next app</p>
+const IndexPage = (props) => {
+  const [memoryToggles, setMemoryToggles] = useState()
+  const [fileToggles, setFileToggles] = useState()
+  const [envToggles, setEnvToggles] = useState()
+  const [configToggles, setConfigToggles] = useState()
 
-    <h2>Env</h2>
-    <pre>{JSON.stringify(envStore.get("serverToggles"))}</pre>
-    <pre>{JSON.stringify(envStore.get("nextConfigToggles"))}</pre>
+  useEffect(() => {
+    setMemoryToggles(memoryStore.get('toggles'))
+    setFileToggles(fileGet('toggles'))
+    setEnvToggles(envStore.get("toggles"))
+    setConfigToggles(publicRuntimeConfig)
+  }, [])
+  return (
+    <>
+      <h1>Stores</h1>
 
-    <h2>publicRuntimeConfig</h2>
-    {/* This is available on the server, bbut not the client */}
-    {console.info(publicRuntimeConfig.serverToggles)}
-    <pre>{JSON.stringify(publicRuntimeConfig.serverToggles)}</pre>
-    <pre>{JSON.stringify(publicRuntimeConfig.nextConfigToggles)}</pre>
-  </>
-)
+      <h2>getServerSideProps</h2>
+      <pre>{JSON.stringify(props)}</pre>
+
+      <h2>Memory</h2>
+      <h3>Server</h3>
+      <pre>{JSON.stringify(memoryStore.get('toggles'))}</pre>
+      <h3>Client</h3>
+      <pre>{JSON.stringify(memoryToggles)}</pre>
+      <hr />
+
+      <h2>File</h2>
+      <h3>Server</h3>
+      <pre>{JSON.stringify(fileGet("toggles"))}</pre>
+      <h3>Client</h3>
+      <pre>{JSON.stringify(fileToggles)}</pre>
+
+      <hr />
+
+      <h2>Env</h2>
+      <h3>Server</h3>
+      <pre>{JSON.stringify(envStore.get("toggles"))}</pre>
+      <h3>Client</h3>
+      <pre>{JSON.stringify(envToggles)}</pre>
+      <hr />
+
+      <h2>configToggles</h2>
+      <h3>Server</h3>
+      <pre>{JSON.stringify(publicRuntimeConfig.toggles)}</pre>
+      <h3>Client</h3>
+      <pre>{JSON.stringify(configToggles)}</pre>
+    </>
+  )
+}
 
 export default IndexPage
