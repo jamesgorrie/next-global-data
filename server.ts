@@ -13,7 +13,7 @@ const handle = app.getRequestHandler()
 
 app.prepare().then(async () => {
   const data = await toggles()
-  process.env.NEXT_PUBLIC_ANALYTICS_ID = "abcdefghijk"
+
 
   memoryStore.set('toggles', data)
   fileSet('toggles', data)
