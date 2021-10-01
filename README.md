@@ -5,13 +5,13 @@ If we define:
 
 The question we are trying to answer:
 
-**How do I get data to the client that is available via HTTP without adding the overhead of latency and data cost of fetching via HTTP directly from the client?**
+**How do I get data to the client that is fetched via HTTP without adding the overhead of latency and data cost of fetching via HTTP directly from the client?**
 
-An answer - **let the server app fetch the data, and share it with the client app.**
+An answer - **let the server fetch the data, and share it with the client.**
 
 If we agree with that, next question!
 
-**Where is accessible to both the server application and the client?**
+**Where can this data be accessible to both the server and the client?**
 
 Some answers:
 
